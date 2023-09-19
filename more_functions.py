@@ -17,3 +17,10 @@ def factorial(n: int):
     else:
         return n * factorial(n-1)
     
+# write a function that calculates the sum of a list of numbers
+
+def sum_of_list(numbers: list):
+    if len(numbers) == 0:
+        return 0
+    else:
+        return numbers[0] + sum_of_list(numbers[1:])
