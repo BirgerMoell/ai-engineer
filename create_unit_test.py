@@ -25,6 +25,7 @@ def code_review_file(filename):
         # create a new file named filename + _review with the comment
         with open(filename + '_review', 'w') as f:
             f.write(response)
+        print(response)
         return response
 # call the function
 #add_unit_tests_to_file('functions.py')

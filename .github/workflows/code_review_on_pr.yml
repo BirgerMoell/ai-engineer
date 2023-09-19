@@ -32,9 +32,17 @@ jobs:
         IFS=' ' read -ra files <<< "${{ steps.getfile.outputs.files }}"
         for file in "${files[@]}"; do
             output=$(python create_unit_test.py "$file")
+            
+            # Debug statement to print the output
+            echo "Debug: Output for $file: $output"
+            
+            if [ -z "$output" ]; then
+                echo "No output generated for $file"
+                continue
+            fi
             echo "::set-output name=review::$output"
         done
-      
+
     - name: Post review as comment
       uses: actions/github-script@v5
       with:
