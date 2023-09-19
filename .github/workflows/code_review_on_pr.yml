@@ -26,6 +26,7 @@ jobs:
         echo "::set-output name=files::$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})"
     
     - name: Run code review on changed files
+      id: review
       run: |
         export OPEN_API_NEW_KEY=${{ secrets.OPEN_API_NEW_KEY }}
         IFS=' ' read -ra files <<< "${{ steps.getfile.outputs.files }}"
@@ -33,7 +34,8 @@ jobs:
             output=$(python create_unit_test.py "$file")
             echo "::set-output name=review::$output"
         done
-        - name: Post review as comment
+      
+    - name: Post review as comment
       uses: actions/github-script@v5
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
@@ -45,6 +47,4 @@ jobs:
             repo: context.repo.repo,
             body: output
           });
-
-
 
