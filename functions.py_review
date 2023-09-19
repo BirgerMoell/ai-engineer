@@ -1,0 +1,38 @@
+Nice work on these functions! All three should work as intended, assuming correct integer input. You've written clean, organized, and efficient code. I like that you've included type hinting for the function parameters as it increases the readability of the code. Here are some suggestions for enhancements:
+
+## Documentation
+Consider adding docstrings at the beginning of each function to provide a brief summary of what each function does, including the expected inputs and the output. This can help improve the maintainability of code, especially in larger projects.
+
+```python
+def area_of_circle(radius :int):
+    """ calculate and return the area of a circle given its radius"""
+    area = np.pi * radius**2
+    return area
+```
+
+## Input validation
+Both 'base' and 'height' in the area_of_triangle are expected to be positive integers. But in the current code, if the user calls the function with negative values or non-integer types, the function will still compute without raising any error, which may result in unwanted consequences. Consider adding input checks to ensure that parameters must be both integers and greater than zero.
+
+```python
+def area_of_triangle(base: int, height: int):
+    """ calculate and return the area of a triangle given its base and height"""
+    if type(base) is not int or type(height) is not int:
+        raise TypeError('Input values should be of int type')
+    elif base <= 0 or height <= 0:
+        raise ValueError('Value of base and height should be greater than 0')
+    area = 0.5 * base * height
+    return area
+```
+## Loose Coupling
+It might be a good idea to remove the dependency on Numpy in the area_of_circle function. Although Numpy is a powerful library for numerical computations, you only use it for the mathematical constant pi. Python’s built-in math module also contains pi which could be used here and would reduce the script's dependencies for future maintenance.
+
+```python
+import math
+
+def area_of_circle(radius :int):
+    """ calculate and return the area of a circle given its radius"""
+    area = math.pi * radius**2
+    return area
+```
+
+Overall, these are minor enhancements to your already well written code. I hope these suggestions were helpful and let me know if you have any questions.

@@ -1,50 +1,18 @@
-# write a fizzbuzz function in python
+# write a function that calculate the area of a circle
+import numpy as np
 
-def fizzbuzz():
-    for i in range(1, 101):
-        if i % 3 == 0 and i % 5 == 0:
-            print("fizzbuzz")
-        elif i % 3 == 0:
-            print("fizz")
-        elif i % 5 == 0:
-            print("buzz")
-        else:
-            print(i)
-# To test the given function, we can redirect the print statements to a string
-# Then make assertions based on the expected output
-# Note that the implementation should return the outputs rather than print them
-# Here is an adjusted implementation for the purpose of testing
+def area_of_circle(radius :int):
+    area = np.pi * radius**2
+    return area
 
-def fizzbuzz():
-    result = []
-    for i in range(1, 101):
-        if i % 3 == 0 and i % 5 == 0:
-            result.append("fizzbuzz")
-        elif i % 3 == 0:
-            result.append("fizz")
-        elif i % 5 == 0:
-            result.append("buzz")
-        else:
-            result.append(i)
-    return result
-  
-import unittest
+# write a function that calculate the area of a triangle
 
-class TestFizzBuzz(unittest.TestCase):
+def area_of_triangle(base: int, height: int):
+    area = 0.5 * base * height
+    return area
 
-    def test_fizzbuzz(self):
-        result = fizzbuzz()
-        self.assertEqual(len(result), 100)
-        
-        for i in range(1, 101):
-            if i % 3 == 0 and i % 5 == 0:
-                self.assertEqual(result[i-1], 'fizzbuzz')
-            elif i % 3 == 0:
-                self.assertEqual(result[i-1], 'fizz')
-            elif i % 5 == 0:
-                self.assertEqual(result[i-1], 'buzz')
-            else:
-                self.assertEqual(result[i-1], i)
+# write a function that calculate the area of a rectangle
 
-if __name__ == '__main__':
-    unittest.main()
+def area_of_rectangle(width: int, height: int):
+    area = width * height
+    return area

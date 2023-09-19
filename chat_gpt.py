@@ -71,12 +71,28 @@ def create_unit_test(text):
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[
-            {"role": "system", "content": "Write the worlds greatest unit test for the following code. Only respond with code, no text"},
+            {"role": "system", "content": """You are a super smart developer using Test Driven Development to write tests according to a specification. Please generate tests based on the above specification. The tests should be as simple as possible, but still cover all the functionality. Comments should be included in the tests to explain what they are testing in python comment notation."""},
             {"role": "user", "content": text}
         ]
     )
 
     text = response['choices'][0]['message']['content']
+
+    return text
+
+
+def code_review(text):
+    print("getting a response from chat gpt for code review for the text", text)
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[
+            {"role": "system", "content": "You are a the worlds greatest developer assigned to review the code below. Review with empathy and clarity, prioritize architecture and maintainability, understand context, ensure functionality, and provide constructive feedback."},
+            {"role": "user", "content": text}
+        ]
+    )
+
+    text = response['choices'][0]['message']['content']
+    print("the response for code review is", text)
 
     return text
 
