@@ -8,3 +8,5 @@ copilot
 Example of a mandelbrot function made using copilot prompting
 # image of mandelbrot
 <img src="mandelbrot.png">
+
+## Give example 
