@@ -1,3 +1,2 @@
 numpy
 openai
-sqlite3
