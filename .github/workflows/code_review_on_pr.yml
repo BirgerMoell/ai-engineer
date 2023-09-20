@@ -34,15 +34,23 @@ jobs:
       run: |
         export OPEN_API_NEW_KEY=${{ secrets.OPEN_API_NEW_KEY }}
         IFS=' ' read -ra files <<< "${{ steps.changed-files-yaml.outputs.src_all_changed_files }}"
-        review_output=""
+        
+        reviews=""
         for file in "${files[@]}"; do
             output=$(python create_unit_test.py "$file")
+            
+            # Debug statement to print the output
             echo "Debug: Output for $file: $output"
-            if [ -n "$output" ]; then
-                review_output="$review_output\n\n$output"
+            
+            if [ -z "$output" ]; then
+                echo "No output generated for $file"
+                continue
             fi
+            
+            reviews="$reviews\n\nOutput for $file: $output"
         done
-        echo "::set-output name=review::$review_output"
+        
+        echo "::set-output name=review::$reviews"
 
     # Post the accumulated output as a single comment
     - name: Post review as comment
