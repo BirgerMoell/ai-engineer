@@ -82,7 +82,7 @@ def create_unit_test(text):
 
 
 def code_review(text):
-    print("getting a response from chat gpt for code review for the text", text)
+    #print("getting a response from chat gpt for code review for the text", text)
     response = openai.ChatCompletion.create(
         model="gpt-4",
         messages=[
@@ -92,7 +92,7 @@ def code_review(text):
     )
 
     text = response['choices'][0]['message']['content']
-    print("the response for code review is", text)
+    #print("the response for code review is", text)
 
     return text
 
