@@ -30,7 +30,7 @@ def code_review_file(filename):
         # with open(filename + '_review', 'w') as f:
         #     f.write(response)
 
-        print(response)
+        #print(response)
         return response
 
     except Exception as e:

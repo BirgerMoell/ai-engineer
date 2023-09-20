@@ -36,7 +36,7 @@ jobs:
         IFS=' ' read -ra files <<< "${{ steps.changed-files-yaml.outputs.src_all_changed_files }}"
         reviews=""
         for file in "${files[@]}"; do
-            output=$(python create_unit_test.py "$file")
+            output=$(python create_unit_test.py "$file" | tr '\n' ' ')
             
             # Debug statement to print the output
             echo "Debug: Output for $file: $output"
@@ -45,7 +45,7 @@ jobs:
             reviews="$reviews\n$output"
         done
         # Remove any leading newline (from the first iteration)
-        reviews=${reviews#\\n}
+        reviews="$reviews\n$output"
         echo "::set-output name=review::$reviews"
 
     # Post the accumulated output as a single comment
