@@ -28,7 +28,7 @@ jobs:
           src:
             - ./*
 
-    # Run code review on changed files and accumulate the output for all files
+# Run code review on changed files and accumulate the output for all files
     - name: Run code review on changed files
       id: review
       run: |
@@ -36,7 +36,7 @@ jobs:
         IFS=' ' read -ra files <<< "${{ steps.changed-files-yaml.outputs.src_all_changed_files }}"
         reviews=""
         for file in "${files[@]}"; do
-            output=$(python create_unit_test.py "$file" | jq -R -s .)
+            output=$(python create_unit_test.py "$file" | jq -R -s . | sed "s/\`/\\\\\`/g")
             
             # Debug statement to print the output
             echo "Debug: Output for $file: $output"
