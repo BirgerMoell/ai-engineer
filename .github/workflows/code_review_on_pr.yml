@@ -36,16 +36,17 @@ jobs:
         IFS=' ' read -ra files <<< "${{ steps.changed-files-yaml.outputs.src_all_changed_files }}"
         reviews=""
         for file in "${files[@]}"; do
-            output=$(python create_unit_test.py "$file" | tr '\n' ' ')
+            output=$(python create_unit_test.py "$file" | jq -R -s .)
             
             # Debug statement to print the output
             echo "Debug: Output for $file: $output"
             
-            # Append to the reviews string
+            if [ -z "$output" ]; then
+                echo "No output generated for $file"
+                continue
+            fi
             reviews="$reviews\n$output"
         done
-        # Remove any leading newline (from the first iteration)
-        reviews="$reviews\n$output"
         echo "::set-output name=review::$reviews"
 
     # Post the accumulated output as a single comment
@@ -54,8 +55,8 @@ jobs:
       with:
         github-token: ${{secrets.GITHUB_TOKEN}}
         script: |
-          const output = `${{ steps.review.outputs.review }}`;
-          if (output.trim() !== "") {
+          const output = `${{ steps.review.outputs.review }}`.trim();
+          if (output !== "") {
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
