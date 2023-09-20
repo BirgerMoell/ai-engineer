@@ -20,17 +20,17 @@ def code_review_file(filename):
         with open(filename, 'r') as f:
             content = f.read()
 
-        print(f"Opening file: {filename}")
-        print("The content of the file is:", content)
+        # print(f"Opening file: {filename}")
+        # print("The content of the file is:", content)
         
         # call the open AI api
         response = code_review(content)
         
         # create a new file named filename + _review with the comment
-        with open(filename + '_review', 'w') as f:
-            f.write(response)
+        # with open(filename + '_review', 'w') as f:
+        #     f.write(response)
 
-        print(response)
+        #print(response)
         return response
 
     except Exception as e:
