@@ -1,0 +1,29 @@
+Hello there,
+
+I appreciate the work you've done here. Your code is easy to read, the function names describe the functionality properly, and also the use of type hints is great. I would like to offer some suggestions to improve the performance and maintainability of your code.
+
+1. For the Fibonacci function: Using recursion for Fibonacci calculations leads to a lot of duplicate calculations which increases the time complexity to O(2^n). This can be improved with memoization or by using an iterative approach.
+
+Here is an example using the iterative approach:
+```python
+def fibonacci(n: int):
+    a, b = 0, 1
+    for _ in range(n):
+        a, b = b, a + b
+    return a
+```
+
+For many calculations, this will be significantly faster than the recursive version.
+
+2. For the Factorial function: Here recursion is fine as the problem divides into smaller sub problems without overlap. But, you may also consider handling negative inputs, as factorial is undefined for negative integers.
+
+3. For the sum_of_list function: Although your recursive approach works fine, using a built-in function will generally perform better and will be easier to understand for other developers.
+
+```python
+def sum_of_list(numbers: list):
+    return sum(numbers)
+```
+
+4. Lastly, it's generally a good idea to include docstrings in your functions to explain their purpose, inputs, and outputs.
+
+All in all, you're doing a fine job and I hope these suggestions will be helpful for you. Keep up the good work!

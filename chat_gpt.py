@@ -96,6 +96,18 @@ def code_review(text):
 
     return text
 
+def get_youtube_link_from_response(text):
+    response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",
+    messages=[
+        {"role": "system", "content": "Based on the following text, what would be a good search string to use on youtube to find a video that gives more information about the topics in the text?"},
+        {"role": "user", "content": text + "Your response should ONLY BE THE SEARCH STRING."}
+        ]
+    )
+
+    text_response = response['choices'][0]['message']['content']
+    return text_response
+
 
 
 # print(get_response_from_chat_gpt("I am feeling anxious."))
