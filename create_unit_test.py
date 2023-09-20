@@ -15,18 +15,27 @@ def add_unit_tests_to_file(file_name):
    
 # code review
 def code_review_file(filename):
-    # read the file
-    with open(filename, 'r') as f:
-        content = f.read()
-        print("the content of the file is", content)
+    try:
+        # read the file
+        with open(filename, 'r') as f:
+            content = f.read()
+
+        # print(f"Opening file: {filename}")
+        # print("The content of the file is:", content)
         
         # call the open AI api
         response = code_review(content)
+        
         # create a new file named filename + _review with the comment
-        with open(filename + '_review', 'w') as f:
-            f.write(response)
+        # with open(filename + '_review', 'w') as f:
+        #     f.write(response)
+
         print(response)
         return response
+
+    except Exception as e:
+        print(f"Error processing file {filename}: {e}")
+        return str(e)
 # call the function
 #add_unit_tests_to_file('functions.py')
 # code_review_file('functions.py')
